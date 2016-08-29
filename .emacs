@@ -109,6 +109,11 @@
 ; org todo logbook
 (setq org-log-into-drawer t)
 
+; org-babel graphviz
+(org-babel-do-load-languages
+'org-babel-load-languages
+'((dot . t))) ; this line activates dot
+
 ; powerline-evil
 (require 'powerline)
 (powerline-default-theme)
