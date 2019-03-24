@@ -1,37 +1,69 @@
 ; melpa rackages
 (require 'package)
 (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
+(add-to-list 'package-archives '("elpy" . "http://jorgenschaefer.github.io/packages/"))
 (package-initialize)
+;(elpy-enable)
+
+; org capture
+(add-to-list 'load-path "~/.emacs.d/lisp/")
+(load "org-protocol-capture-html")
+
+;mac
+(require 'cl)
+(setq mac-option-key-is-meta t)
+(setq mac-right-option-modifier nil)
+
+; load theme
+(add-hook 'after-init-hook (lambda () (load-theme 'solarized-dark)))
+
+; start server
+(server-start)
+(add-to-list 'auto-mode-alist '("/mutt" . mail-mode))
+
+; ido mode
+(setq ido-enable-flex-matching t)
+(setq ido-everywhere t)
+(ido-mode 1)
+
+; fixing elpy keybinding
+;(define-key yas-minor-mode-map (kbd "C-c k") 'yas-expand)
+;(define-key global-map (kbd "C-c o") 'iedit-mode)
+;; For elpy
+;(setq elpy-rpc-python-command "python3")
+;; For interactive shell
+;(setq python-shell-interpreter "python3")
+
+;(tramp-set-completion-function "ssh"
+;                               '((tramp-parse-sconfig "/etc/ssh_config")
+;                                 (tramp-parse-sconfig "~/.ssh/config")))
+
+;(setq tramp-default-method "ssh")
+
+;(add-to-list 'backup-directory-alist
+;				 (cons tramp-file-name-regexp nil))
+
+;(setq tramp-ssh-controlmaster-options
+;                (concat
+;                  "-o ControlPath=/tmp/ssh-ControlPath-%%r@%%h:%%p "
+;                  "-o ControlMaster=auto -o ControlPersist=yes"))
+
 
 ;Tell emacs where is your personal elisp lib dir
 (add-to-list 'load-path "~/.emacs.d/lisp/")
 (load "org-protocol-capture-html")
-
-; mac osx start up
-(require 'cl) 
-
-; visual line mode
-(add-hook 'text-mode-hook 'visual-line-mode)
-
-; pandoc location
-(add-to-list 'exec-path "/usr/local/bin")
-(setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin/pandoc"))
-
-; server start
-(server-start)
 
 ; hide start up screen
 (setq inhibit-startup-screen t)
 (setq inhibit-startup-message t) 
 (setq initial-scratch-message nil)
 ; hide toolbar
-;(tool-bar-mode -1)
+(tool-bar-mode -1)
 ; hide scrollbar
 (scroll-bar-mode -1)
 
-; mac swap ctrl and cmd
-(setq mac-command-modifier 'control)
-(setq mac-control-modifier 'super)
+; visual line mode
+(add-hook 'text-mode-hook 'visual-line-mode)
 
 ; backup directory
 (setq backup-directory-alist '(("." . "~/.emacs.d/backups")))
@@ -46,11 +78,12 @@
 ; case insensitive search
 (setq read-file-name-completion-ignore-case t)
 (setq pcomplete-ignore-case t)
+
 ; place headers on the left
 (setq markdown-asymmetric-header t)
 
 ; markdown preview using pandoc
-(setq markdown-command "/usr/local/bin/pandoc -f markdown -t html -s -S --mathjax --highlight-style=pygments")
+(setq markdown-command "pandoc -f markdown -t html -s -S --mathjax --highlight-style=pygments -c ~/git/pandoc-css/pandoc.css")
 
 ; gfm mode
 (setq auto-mode-alist (cons '("\\.mdt$" . gfm-mode) auto-mode-alist))
@@ -64,21 +97,33 @@
 (require 'org-protocol)
 (require 'org-capture)
 (require 'org-protocol-capture-html)
-(setq org-agenda-files '("~/org/"))
+(setq org-agenda-files '("~/git/org/"))
 (define-key global-map "\C-cl" 'org-store-link)
 (define-key global-map "\C-ca" 'org-agenda)
 
 ; org-capture
 (global-set-key "\C-cc" 'org-capture)
 
+(defadvice org-capture
+    (after make-full-window-frame activate)
+  "Advise capture to be the only window when used as a popup"
+  (if (equal "emacs-capture" (frame-parameter nil 'name))
+      (delete-other-windows)))
+
+(defadvice org-capture-finalize
+    (after delete-capture-frame activate)
+  "Advise capture-finalize to close the frame"
+  (if (equal "emacs-capture" (frame-parameter nil 'name))
+      (delete-frame)))
+
 ; org capture templates
 (setq org-capture-templates
-    '(("t" "Todo" entry
-      (file+headline "~/org/todo.org" "Tasks")
-      (file "~/org/templates/tpl-todo.txt")
+    '(("t" "todo" entry
+      (file+headline "~/git/org/todo.org" "Tasks")
+      (file "~/git/org/templates/tpl-todo.txt")
       :empty-lines-before 1)
-      ("w" "Web site" entry (file+olp "~/org/web.org" "Web")
-      (file "~/org/templates/tpl-web.txt")
+      ("w" "web site" entry (file+olp "~/git/org/web.org" "sites")
+      (file "~/git/org/templates/tpl-web.txt")
       :empty-lines-before 1)))
 
 ; refile
@@ -93,14 +138,24 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- )
+ '(menu ((t (:background "black" :foreground "white"))))
+ '(org-link ((t (:inherit link :underline nil)))))
 
-;; Prepare stuff for org-export-backends
-(setq org-export-backends '(org latex icalendar html md odt ascii))
+; Prepare stuff for org-export-backends
+(setq org-export-backends '(org md html latex icalendar odt ascii))
+
+; org hide markup
+(setq org-hide-emphasis-markers t)
+
+; org spacing
+;(setq org-cycle-separator-lines 1)
+
+; org column spacing for tags
+(setq org-tags-column 0)
 
 ; todo keywords
 (setq org-todo-keywords
-      '((sequence "TODO(t@/!)" "IN-PROGRESS(p/!)" "WAITING(w@/!)" " | " "DONE(d@)")))
+      '((sequence "TODO(t@/!)" "IN-PROGRESS(p/!)" "WAITING(w@/!)" "|" "DONE(d@)")))
 (setq org-log-done t)
 
 ; Fast Todo Selection - Changing a task state is done with C-c C-t KEY
@@ -112,7 +167,8 @@
 ; org-babel graphviz
 (org-babel-do-load-languages
 'org-babel-load-languages
-'((dot . t))) ; this line activates dot
+'((dot . t)
+  (shell . t))) ; this line activates bash shell script
 
 ; powerline-evil
 (require 'powerline)
@@ -122,9 +178,27 @@
 ; magit 
 (global-set-key (kbd "C-x g") 'magit-status)
 
-; git auto commit mode - auto push to head after commit
+; git-auto-commit-mode auto push to head
 ;(setq-default gac-automatically-push-p t)
 
 ; undo tree
 (require 'undo-tree)
 (global-undo-tree-mode 1)
+
+; ox-pandoc export
+(setq org-pandoc-options-for-markdown '((atx-headers . t)))
+(setq org-pandoc-options-for-latex-pdf '((latex-engine . "xelatex")))
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(auth-source-save-behavior nil)
+ '(custom-safe-themes
+   (quote
+    ("8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" default)))
+ '(package-selected-packages
+   (quote
+    (solarized-theme w3m ranger json-mode graphviz-dot-mode ## elpy powerline ox-pandoc markdown-mode magit git-auto-commit-mode evil-surround evil-leader emmet-mode))))
+
+;(ranger-override-dired-mode t)
