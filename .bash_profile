@@ -1,8 +1,12 @@
 # bash path
-export PATH=$PATH:~/bin
+#export PATH=$PATH:~/bin
 
-# editor
-export EDITOR="/usr/bin/vim"
+EDITOR="/usr/bin/vim"; export EDITOR
+
+# home bin 
+if [ -d "$HOME/bin" ]; then
+   PATH="$HOME/bin:$PATH"
+fi
 
 # bash aliases
 if [ -f "$HOME/.bash_aliases" ]; then

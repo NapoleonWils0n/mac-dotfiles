@@ -1,6 +1,10 @@
 # bash aliases
 #=============
 
+# synergy
+alias synergyc="$HOME/Applications/Synergy.app/Contents/MacOS/synergyc"
+alias synergys="$HOME/Applications/Synergy.app/Contents/MacOS/synergyc"
+
 # wget - enable continue and set the user agent
 alias wget='wget --user-agent="Mozilla" -c'
 
