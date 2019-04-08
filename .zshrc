@@ -27,6 +27,9 @@ compinit
 # directories
 #============
 
+# homebrew
+export PATH="/usr/local/sbin:$PATH"
+
 # home bin 
 if [ -d "$HOME/bin" ]; then
    PATH="$HOME/bin:$PATH"
