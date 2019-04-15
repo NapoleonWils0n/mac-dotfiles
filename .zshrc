@@ -1,4 +1,7 @@
 # Lines configured by zsh-newuser-install
+# ssh zsh fix
+[[ $TERM == "dumb" ]] && unsetopt zle && PS1='$ ' && return
+
 HISTFILE=~/.histfile
 HISTSIZE=1000
 SAVEHIST=1000
@@ -22,6 +25,11 @@ compinit
 # emacsclient function e
 #function e {
 #/usr/local/bin/emacsclient "$@"
+#}
+
+
+#function mpv {
+#/usr/local/bin/mpv "$@" 2>/dev/null
 #}
 
 # directories
