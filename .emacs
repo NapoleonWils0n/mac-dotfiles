@@ -208,3 +208,22 @@
     (solarized-theme w3m ranger json-mode graphviz-dot-mode ## elpy powerline ox-pandoc markdown-mode magit git-auto-commit-mode evil-surround evil-leader emmet-mode))))
 
 ;(ranger-override-dired-mode t)
+
+;(setq org-latex-listings 'minted)
+(setq org-latex-listings 'minted
+    org-latex-packages-alist '(("" "minted"))
+    org-latex-pdf-process
+    '("pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
+    "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"))
+
+(setq org-latex-minted-options
+    '(("frame" "lines") ("linenos=true")) )
+;(setq org-latex-listings 'minted)
+(setq org-latex-listings 'minted
+    org-latex-packages-alist '(("" "minted"))
+    org-latex-pdf-process
+    '("pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
+    "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"))
+
+(setq org-latex-minted-options
+    '(("frame" "lines") ("linenos=true")) )
