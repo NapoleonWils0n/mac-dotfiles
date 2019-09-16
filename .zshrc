@@ -48,6 +48,10 @@ if [ -d "$HOME/.local/bin" ]; then
    PATH="$HOME/.local/bin:$PATH"
 fi
 
+if [ -d "$HOME/Library/Python/3.7/bin" ] ; then
+        PATH="$HOME/Library/Python/3.7/bin:$PATH"
+fi
+
 # git prompt
 if [ -f "$HOME/.git-prompt.sh" ]; then
    source "$HOME/.git-prompt.sh"

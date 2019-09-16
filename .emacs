@@ -145,6 +145,15 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(menu ((t (:background "black" :foreground "white"))))
+ '(org-document-title ((t (:foreground "#93a1a1" :weight bold :height 1.0))))
+ '(org-level-1 ((t (:inherit variable-pitch :foreground "#cb4b16" :height 1.0))))
+ '(org-level-2 ((t (:inherit variable-pitch :foreground "#859900" :height 1.0))))
+ '(org-level-3 ((t (:inherit variable-pitch :foreground "#268bd2" :height 1.0))))
+ '(org-level-4 ((t (:inherit variable-pitch :foreground "#b58900" :height 1.0))))
+ '(org-level-5 ((t (:inherit variable-pitch :foreground "#2aa198"))))
+ '(org-level-6 ((t (:inherit variable-pitch))))
+ '(org-level-7 ((t (:inherit variable-pitch))))
+ '(org-level-8 ((t (:inherit variable-pitch))))
  '(org-link ((t (:inherit link :underline nil)))))
 
 ; Prepare stuff for org-export-backends
@@ -202,7 +211,7 @@
  '(auth-source-save-behavior nil)
  '(custom-safe-themes
    (quote
-    ("8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" default)))
+    ("0598c6a29e13e7112cfbc2f523e31927ab7dce56ebb2016b567e1eff6dc1fd4f" "8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" default)))
  '(package-selected-packages
    (quote
     (solarized-theme w3m ranger json-mode graphviz-dot-mode ## elpy powerline ox-pandoc markdown-mode magit git-auto-commit-mode evil-surround evil-leader emmet-mode))))
