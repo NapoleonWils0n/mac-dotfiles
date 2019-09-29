@@ -214,9 +214,8 @@
     ("0598c6a29e13e7112cfbc2f523e31927ab7dce56ebb2016b567e1eff6dc1fd4f" "8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" default)))
  '(package-selected-packages
    (quote
-    (solarized-theme w3m ranger json-mode graphviz-dot-mode ## elpy powerline ox-pandoc markdown-mode magit git-auto-commit-mode evil-surround evil-leader emmet-mode))))
+    (dired-ranger ranger solarized-theme w3m json-mode graphviz-dot-mode ## elpy powerline ox-pandoc markdown-mode magit git-auto-commit-mode evil-surround evil-leader emmet-mode))))
 
-;(ranger-override-dired-mode t)
 
 ;(setq org-latex-listings 'minted)
 (setq org-latex-listings 'minted
@@ -236,3 +235,8 @@
 
 (setq org-latex-minted-options
     '(("frame" "lines") ("linenos=true")) )
+
+; always follow symlinks
+(setq vc-follow-symlinks t)
+
+(ranger-override-dired-mode t)
