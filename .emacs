@@ -240,3 +240,8 @@
 (setq vc-follow-symlinks t)
 
 (ranger-override-dired-mode t)
+
+; flycheck syntax highlighting
+(package-install 'exec-path-from-shell)
+(exec-path-from-shell-initialize)
+(add-hook 'sh-mode-hook 'flycheck-mode)
