@@ -255,3 +255,49 @@
 
 ; dired hide aync output buffer
 (add-to-list 'display-buffer-alist (cons "\\*Async Shell Command\\*.*" (cons #'display-buffer-no-window nil)))
+
+; elfeed
+(require 'elfeed)
+(require 'elfeed-org)
+(elfeed-org)
+(setq rmh-elfeed-org-files (list "~/git/org/feeds.org"))
+(global-set-key (kbd "C-x w") 'elfeed)
+
+
+; Mark all YouTube entries
+(add-hook 'elfeed-new-entry-hook
+          (elfeed-make-tagger :feed-url "youtube\\.com"
+                              :add '(video youtube)))
+
+; elfeed goodies
+(require 'elfeed-goodies)
+(elfeed-goodies/setup)
+
+; elfeed evil
+(add-to-list 'evil-motion-state-modes 'elfeed-search-mode)
+(add-to-list 'evil-motion-state-modes 'elfeed-show-mode)
+
+; l show entry
+(define-key elfeed-search-mode-map (kbd "l") 'elfeed-search-show-entry)
+
+; elfeed face for tags
+(defface youtube-elfeed-entry
+  '((t :foreground "#268bd2"))
+  "Marks an youtube Elfeed entry.")
+
+(push '(youtube youtube-elfeed-entry)
+      elfeed-search-face-alist)
+
+(defface freebsd-elfeed-entry
+  '((t :foreground "#b58900"))
+  "Marks an freensd Elfeed entry.")
+
+(push '(freebsd freebsd-elfeed-entry)
+      elfeed-search-face-alist)
+
+(defface nufc-elfeed-entry
+  '((t :foreground "#2aa198"))
+  "Marks an nufc Elfeed entry.")
+
+(push '(nufc nufc-elfeed-entry)
+      elfeed-search-face-alist)
