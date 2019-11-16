@@ -7,7 +7,7 @@ set smtp_authenticators = 'gssapi:login'
 # make mutt work with solarized theme
 color normal default default
 set imap_user = "danieljwilcox@gmail.com"
-set smtp_url = "smtp://danieljwilcox@smtp.gmail.com:587/"
+set smtp_url = "smtps://danieljwilcox@smtp.gmail.com:465/"
 source "gpg -d ~/.mutt/mutt-passwords.gpg |"
 
 set folder = "imaps://imap.gmail.com:993"
