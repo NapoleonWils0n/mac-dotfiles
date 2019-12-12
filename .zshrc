@@ -57,6 +57,9 @@ if [ -f "$HOME/.git-prompt.sh" ]; then
    source "$HOME/.git-prompt.sh"
 fi
 
+# homebrew path
+export PATH=/usr/local/bin:$PATH
+
 # prompt
 setopt prompt_subst
 GIT_PS1_SHOWDIRTYSTATE=true
