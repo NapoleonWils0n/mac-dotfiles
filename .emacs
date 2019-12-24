@@ -214,7 +214,7 @@
     ("2809bcb77ad21312897b541134981282dc455ccd7c14d74cc333b6e549b824f3" "5dbdb4a71a0e834318ae868143bb4329be492dd04bdf8b398fb103ba1b8c681a" "a68670dce845d18af9ec87716b4d4c2ea071271eccc80242be4d232c58b3cca2" "0598c6a29e13e7112cfbc2f523e31927ab7dce56ebb2016b567e1eff6dc1fd4f" "8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" default)))
  '(package-selected-packages
    (quote
-    (elfeed elfeed-goodies elfeed-org exec-path-from-shell flycheck solarized-theme w3m json-mode graphviz-dot-mode elpy powerline ox-pandoc markdown-mode magit git-auto-commit-mode evil-surround evil-leader emmet-mode))))
+    (ob-async elfeed elfeed-goodies elfeed-org exec-path-from-shell flycheck solarized-theme w3m json-mode graphviz-dot-mode elpy powerline ox-pandoc markdown-mode magit git-auto-commit-mode evil-surround evil-leader emmet-mode))))
 
 
 ;(setq org-latex-listings 'minted)
@@ -344,3 +344,6 @@
 (setq org-confirm-babel-evaluate nil
       org-src-fontify-natively t
       org-src-tab-acts-natively t)
+
+; ob-async
+(require 'ob-async)
