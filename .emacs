@@ -3,6 +3,15 @@
 (setq inhibit-startup-message t)
 (setq inhibit-startup-screen t)
 (setq initial-scratch-message nil)
+(scroll-bar-mode -1)
+(tool-bar-mode 0)
+(set-frame-size nil 100 50) 
+
+; mac osx keybings --------------------------------------------------------------------------------------
+
+(when (eq system-type 'darwin) 
+  (setq mac-command-modifier 'super)
+  )
 
 ;  mac melpa fix --------------------------------------------------------------------------
 
