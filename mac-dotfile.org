@@ -50,7 +50,6 @@ sh <(curl -L https://nixos.org/nix/install) \
         '')
         apg
         aria
-        awscli
         bat
         bc
         curl
@@ -64,7 +63,6 @@ sh <(curl -L https://nixos.org/nix/install) \
         gimp
         git
         gnuplot
-        gpsbabel
         graphviz
         html-xml-utils
         imagemagick
@@ -4268,7 +4266,6 @@ ui = true
 <<gitconfig>>
 #+END_SRC
 
-
 ** git-prompt
 *** git-prompt config
 
@@ -4826,7 +4823,6 @@ __git_ps1 ()
 #+BEGIN_SRC conf :noweb yes :tangle ".git-prompt.sh"
 <<git-prompt>>
 #+END_SRC
-
 
 ** hushlogin
 *** hushlogin config

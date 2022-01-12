@@ -14,7 +14,6 @@
         '')
         apg
         aria
-        awscli
         bat
         bc
         curl
@@ -28,7 +27,6 @@
         gimp
         git
         gnuplot
-        gpsbabel
         graphviz
         html-xml-utils
         imagemagick
