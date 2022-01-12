@@ -6,19 +6,9 @@
 # Keep 1000 lines of history within the shell and save it to ~/.zsh_history:
 HISTSIZE=1000
 
-# set PATH so it includes user bin if it exists
-if [ -d "$HOME/bin" ] ; then
-    PATH="$HOME/bin:$PATH"
-fi
-
-# set PATH so it includes user local bin if it exists
-if [ -d "$HOME/.local/bin" ] ; then
-    PATH="$HOME/.local/bin:$PATH"
-fi
-
-# git prompt script
-if [ -f "$HOME/.git-prompt.sh" ]; then
-	source "$HOME/.git-prompt.sh"
+# git-sh-prompt
+if [ -f ~/.git-prompt.sh ]; then
+   source ~/.git-prompt.sh
 fi
 
 # git prompt variables
@@ -152,46 +142,8 @@ zstyle ':completion:*' rehash true
 #ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern)
 #ZSH_HIGHLIGHT_PATTERNS=('rm -rf *' 'fg=white,bold,bg=red')
 
-# aliases
-
-# hdmi display on
-alias hdmi-on='xrandr --output eDP-1-1 --auto --primary --output DP-1-3 --mode 1920x1080 --right-of eDP-1-1 && ~/.fehbg &>/dev/null'
-
-# hdmi display off
-alias hdmi-off='xrandr --output eDP-1-1 --auto --primary --output DP-1-3 --off && ~/.fehbg &>/dev/null'
-
-# functions
-
-# transmission
-
-# clear completed torrents
-trd-clearcompleted() {
-  transmission-remote -l | grep 100% | grep Done | \
-  awk '{print $1}' | xargs -n 1 -I % transmission-remote -t % -r
-}
-
-trd-altdownloadspeed() { transmission-remote --downlimit "${@:-900}" ;}	# download default to 900K, else enter your own
-trd-altdownloadspeedunlimited() { transmission-remote --no-downlimit ;}
-trd-limitupload() { transmission-remote --uplimit "${@:-10}" ;}	# upload default to 10kpbs, else enter your own
-trd-limituploadunlimited() { transmission-remote --no-uplimit ;}
-trd-askmorepeers() { transmission-remote -t"$1" --reannounce ;}
-trd-daemon() { transmission-daemon ;}
-trd-quit() { killall transmission-daemon ;}
-trd-add() { transmission-remote --add "$1" ;}
-trd-hash() { transmission-remote --add "magnet:?xt=urn:btih:$1" ;}       # adding via hash info
-trd-verify() { transmission-remote --verify "$1" ;}
-trd-pause() { transmission-remote -t"$1" --stop ;}		# <id> or all
-trd-start() { transmission-remote -t"$1" --start ;}		# <id> or all
-trd-purge() { transmission-remote -t"$1" --remove-and-delete ;} # delete data also
-trd-remove() { transmission-remote -t"$1" --remove ;}		# leaves data alone
-trd-info() { transmission-remote -t"$1" --info ;}
-trd-speed() { while true;do clear; transmission-remote -t"$1" -i | grep Speed;sleep 1;done ;}
-trd-grep() { transmission-remote --list | grep -i "$1" ;}
-trd-list() { transmission-remote --list ;}
-trd-show() { transmission-show "$1" ;}                          # show .torrent file information
-
-# namespace autocomplete
-compdef _precommand namespace
-
 # ytfzf autocomplete
 compdef _gnu_generic ytfzf
+
+# nixpks completion
+compdef _gnu_generic nix-env
