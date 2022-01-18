@@ -63,7 +63,7 @@
 
 ;; package archive
 (setq package-archives '(("melpa" . "https://melpa.org/packages/")
-                         ("elpy" . "http://jorgenschaefer.github.io/packages/")))
+                         ("elpa" . "https://elpa.gnu.org/packages/")))
 
 ;; package initialize
 (package-initialize)
